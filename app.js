@@ -17,7 +17,7 @@ const mongoose = require('mongoose');
 const User = require('./models/user');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/user');
+// const usersRouter = require('./routes/user');
 
 const app = express();
 
@@ -77,7 +77,7 @@ app.use((req, res, next) => {
 //app.use(express.static(join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/user', usersRouter);
+// app.use('/user', usersRouter);
 
 // Catch missing routes and forward to error handler
 app.use((req, res, next) => {
