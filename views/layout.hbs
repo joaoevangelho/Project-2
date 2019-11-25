@@ -17,19 +17,23 @@
 
     {{#if user}}
 
-    <form action="/sign-out" method="POST">
-      <a href="/sign-out">Sign Out</a>
+    <form action="/authentication/sign-out" method="POST">
+      <a href="/authentication/sign-out">Sign Out</a>
       {{!-- <a href="/">{{user.name}}'s Profile</a> --}}
       {{!-- <a href="/private">Private</a> --}}
       <a href="/user">{{user.name}}'s Profile</a>
     </form>
 
     {{else}}
-    <a href="/sign-in">Sign In</a>
-    <a href="/sign-up">Sign Up</a>
+    <a href="/authentication/sign-in">Sign In</a>
+    <a href="/authentication/sign-up">Sign Up</a>
     {{/if}}
   </nav>
   {{{body}}}
+
+  <script src="/scripts/script.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGD7_VrYPlO5F-qYuZSo_KSNAjHWev2Tg&callback=initMap"
+    async defer></script>
 </body>
 
 </html>
