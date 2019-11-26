@@ -21,17 +21,7 @@ const imageSchema = new mongoose.Schema(
   }
 );
 
-const cloudinary = require("cloudinary");
-imageSchema.virtual("resizedUrl").get(function() {
-  const image = this;
-  const url = image.url;
-  const path = url.replace(/[\w\/.:]+upload\//i, "");
-  console.log(path);
-  const resizedUrl = cloudinary.url(path, {
-    width: 670
-  });
-  return resizedUrl;
-});
+
 
 const Image = mongoose.model("Image", imageSchema);
 

@@ -1,8 +1,45 @@
 <h1>User Profile</h1>
 <p>{{user.name}}</p>
-
-
+<img src="{{user.photo}}" alt="bla" id="TeacherPhoto">
 {{#ifEquals user.role "Teacher"}}
 Input location
-<div class="div-map map-welcome-page" id="map"></div>
+{{!-- <div class="div-map map-welcome-page" id="map"></div> --}}
+
+<body>
+    <div id="floating-panel">
+        <input id="address" type="textbox" value="City">
+        <input id="submit" type="button" value="Enter">
+    </div>
+    <div id="map2"></div>
+    <script>
+
+        function initMap2() {
+            let map2 = new window.google.maps.Map(document.getElementById('map2'), {
+                zoom: 8,
+                center: { lat: -34.397, lng: 150.644 }
+            });
+            let geocoder = new google.maps.Geocoder();
+
+            document.getElementById('submit').addEventListener('click', function () {
+                geocodeAddress(geocoder, map2);
+            });
+        }
+
+        function geocodeAddress(geocoder, resultsMap) {
+            let address = document.getElementById('address').value;
+            geocoder.geocode({ 'address': address }, function (results, status) {
+                if (status === 'OK') {
+                    resultsMap.setCenter(results[0].geometry.location);
+                    let marker = new google.maps.Marker({
+                        map: resultsMap,
+                        position: results[0].geometry.location
+                    });
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+    </script>
+
+</body>
 {{/ifEquals}}

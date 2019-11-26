@@ -6,24 +6,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>{{title}}</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-  <link rel="stylesheet" type="text/css" href="styles/style.css">
+  <link rel="stylesheet" href="../styles/style.css">
 </head>
+
 
 <body>
   <nav>
-    <a href="/">Home Page</a>
+
+    <a class="navbar-brand" href="/">Home Page</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
     {{#if user}}
-    <a href="/profile">{{user.name}}'s Profile</a>
 
     <form action="/authentication/sign-out" method="POST">
       <a href="/authentication/sign-out">Sign Out</a>
     </form>
+    <a href="/profile">{{user.name}}'s Profile</a>
+
     {{else}}
     <a href="/authentication/sign-in">Sign In</a>
     <a href="/authentication/sign-up">Sign Up</a>
     {{/if}}
-
 
 
   </nav>
@@ -31,23 +37,25 @@
 
   <script src="/scripts/script.js"></script>
   <script>
-    if (!window.initMap) {
-      window.initMap = function () { };
-    }
-  </script>
 
-  <script>
+
+    function initialize() {
+      initMap();
+      initMap2();
+    }
 
     function initMap() {
       console.log('Google library was loaded');
       const $mapContainer = document.getElementById('map');
+
+
       if ($mapContainer) {
         const map = new window.google.maps.Map($mapContainer, {
           center: {
             lat: 38.7,
-            lng: -8.472837
+            lng: -9.1
           },
-          zoom: 8,
+          zoom: 12,
           //disableDefaultUI: true,
           //mapTypeId: 'satellite',
           //mapTypeId: 'roadmap', // -> default
@@ -56,7 +64,7 @@
         });
 
         const betaICoordinates = {
-          lat: 38.818752,
+          lat: 38.729,
           lng: -9.144
         };
 
@@ -64,7 +72,6 @@
           position: betaICoordinates,
           map
         });
-
 
         map.addListener('click', event => {
           console.log(event);
@@ -77,15 +84,15 @@
             position,
             map
           });
+
         })
-
-
-
       }
+
     };
+
   </script>
   <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGD7_VrYPlO5F-qYuZSo_KSNAjHWev2Tg&callback=initMap"></script>
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGD7_VrYPlO5F-qYuZSo_KSNAjHWev2Tg&callback=initialize"></script>
 </body>
 
 </html>
