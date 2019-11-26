@@ -49,7 +49,7 @@ app.use(
     resave: true,
     saveUninitialized: false,
     cookie: {
-      maxAge: 60 * 60 * 24,
+      maxAge: 60 * 60 * 24 * 15,
 
       sameSite: true,
       httpOnly: true,
@@ -80,10 +80,9 @@ app.use((req, res, next) => {
     next();
   }
 });
-//app.use(express.static(join(__dirname, 'public')));
+app.use(express.static(join(__dirname, 'public')));
 
 app.use('/authentication', authenticationRouter);
-
 app.use("/", indexRouter);
 // app.use('/user', usersRouter);
 

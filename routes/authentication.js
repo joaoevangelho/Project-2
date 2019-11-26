@@ -91,15 +91,12 @@ router.post('/sign-in', (req, res, next) => {
 
 
 // Sign Out
-router.get('authentication/sign-out', (req, res, next) => {
-    req.session.destroy();
-    res.render('sign-out');
-});
-
-router.post('/sign-out', (req, res, next) => {
+router.get('/sign-out', (req, res, next) => {
     req.session.destroy();
     res.redirect('/');
 });
+
+
 
 const routeGuard = require('./../middleware/route-guard');
 

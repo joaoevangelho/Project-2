@@ -5,10 +5,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>{{title}}</title>
-  <link rel='stylesheet' href='/styles/style.css' />
-  <title>{{title}}</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="/styles/style.css" />
+  {{!-- <link rel='stylesheet' href="styles/style.scss" /> --}}
+  <link rel="stylesheet" type="text/css" href="styles/style.css">
 </head>
 
 <body>
@@ -19,9 +18,7 @@
 
     <form action="/authentication/sign-out" method="POST">
       <a href="/authentication/sign-out">Sign Out</a>
-      {{!-- <a href="/">{{user.name}}'s Profile</a> --}}
-      {{!-- <a href="/private">Private</a> --}}
-      <a href="/user">{{user.name}}'s Profile</a>
+      <a href="/authentication/user">{{user.name}}'s Profile</a>
     </form>
 
     {{else}}
@@ -31,9 +28,15 @@
   </nav>
   {{{body}}}
 
-  <script src="/scripts/script.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGD7_VrYPlO5F-qYuZSo_KSNAjHWev2Tg&callback=initMap"
-    async defer></script>
+  {{!-- <script src="/scripts/script.js"></script> --}}
+  <script>
+    if (!window.initMap) {
+      window.initMap = function () { };
+    }
+  </script>
+
+  <script <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGD7_VrYPlO5F-qYuZSo_KSNAjHWev2Tg&callback=initMap"></script>
 </body>
 
 </html>
