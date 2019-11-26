@@ -2,6 +2,8 @@
 
 
 //teste
+//zé simão
+
 const { Router } = require("express");
 const router = new Router();
 
@@ -86,7 +88,5 @@ router.get("/sign-out", (req, res, next) => {
 });
 
 module.exports = router;
-
-
 
 //nao percebo anda disto
