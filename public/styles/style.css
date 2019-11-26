@@ -1,14 +1,16 @@
 body {
   margin: 0;
   padding: 50px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-image: url("../images/IMG_2938.jpg");
+  background-repeat: no-repeat;
+  background-size: cover; }
 
 a {
   color: #00b7ff; }
 
 #map {
   width: 40%;
-  height: 40em;
-  border: 1px solid red; }
+  height: 45em; }
 
 /*# sourceMappingURL=style.css.map */

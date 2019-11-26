@@ -98,11 +98,4 @@ router.get('/sign-out', (req, res, next) => {
 
 
 
-const routeGuard = require('./../middleware/route-guard');
-
-router.get('/user', routeGuard, (req, res, next) => {
-    res.render('user');
-    //used to be private instead of user
-});
-
 module.exports = router;

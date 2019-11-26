@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>{{title}}</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-  {{!-- <link rel='stylesheet' href="styles/style.scss" /> --}}
   <link rel="stylesheet" type="text/css" href="styles/style.css">
 </head>
 
@@ -15,27 +14,77 @@
     <a href="/">Home Page</a>
 
     {{#if user}}
+    <a href="/profile">{{user.name}}'s Profile</a>
 
     <form action="/authentication/sign-out" method="POST">
       <a href="/authentication/sign-out">Sign Out</a>
-      <a href="/authentication/user">{{user.name}}'s Profile</a>
     </form>
-
     {{else}}
     <a href="/authentication/sign-in">Sign In</a>
     <a href="/authentication/sign-up">Sign Up</a>
     {{/if}}
+
+
+
   </nav>
   {{{body}}}
 
-  {{!-- <script src="/scripts/script.js"></script> --}}
+  <script src="/scripts/script.js"></script>
   <script>
     if (!window.initMap) {
       window.initMap = function () { };
     }
   </script>
 
-  <script <script
+  <script>
+
+    function initMap() {
+      console.log('Google library was loaded');
+      const $mapContainer = document.getElementById('map');
+      if ($mapContainer) {
+        const map = new window.google.maps.Map($mapContainer, {
+          center: {
+            lat: 38.7,
+            lng: -8.472837
+          },
+          zoom: 8,
+          //disableDefaultUI: true,
+          //mapTypeId: 'satellite',
+          //mapTypeId: 'roadmap', // -> default
+          //mapTypeId: 'terrain',
+          mapTypeId: 'hybrid',
+        });
+
+        const betaICoordinates = {
+          lat: 38.818752,
+          lng: -9.144
+        };
+
+        const marker = new window.google.maps.Marker({
+          position: betaICoordinates,
+          map
+        });
+
+
+        map.addListener('click', event => {
+          console.log(event);
+          const position = {
+            lat: event.latLng.lat(),
+            lng: event.latLng.lng()
+          };
+          //console.log(position);
+          new window.google.maps.Marker({
+            position,
+            map
+          });
+        })
+
+
+
+      }
+    };
+  </script>
+  <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGD7_VrYPlO5F-qYuZSo_KSNAjHWev2Tg&callback=initMap"></script>
 </body>
 

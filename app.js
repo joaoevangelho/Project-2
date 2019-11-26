@@ -15,9 +15,14 @@ const connectMongo = require("connect-mongo");
 const MongoStore = connectMongo(expressSession);
 const mongoose = require("mongoose");
 const User = require("./models/user");
-
+const hbs = require("hbs")
+//HBS HELPERS
+hbs.registerHelper('ifEquals', function (arg1, arg2, options) {
+  return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+});
 const indexRouter = require("./routes/index");
 const authenticationRouter = require('./routes/authentication');
+
 
 // const usersRouter = require('./routes/user');
 
@@ -42,6 +47,7 @@ app.use(
     sourceMap: true
   })
 );
+app.use(express.static(join(__dirname, 'public')));
 
 app.use(
   expressSession({
@@ -80,7 +86,6 @@ app.use((req, res, next) => {
     next();
   }
 });
-app.use(express.static(join(__dirname, 'public')));
 
 app.use('/authentication', authenticationRouter);
 app.use("/", indexRouter);

@@ -2,7 +2,7 @@
 <p>{{user.name}}</p>
 
 
-
-
-
-<div id="map"></div>
+{{#ifEquals user.role "Teacher"}}
+Input location
+<div class="div-map map-welcome-page" id="map"></div>
+{{/ifEquals}}
