@@ -9,16 +9,16 @@ const postSchema = new mongoose.Schema({
   },
   author: {
     type: mongoose.Types.ObjectId,
-    ref: 'User',
-    required: true
+    required: true,
+    ref: 'User'
   },
-  // images: [{
-  //   type: mongoose.Types.ObjectId,
-  //   ref: 'Image'
-  // }]
-  photo: {
-    type: String
-  }
+  images: [{
+    type: mongoose.Types.ObjectId,
+    ref: 'Image'
+  }]
+  // photo: {
+  //   type: String
+  // }
 }, {
   timestamps: {
     createdAt: 'creationDate',
