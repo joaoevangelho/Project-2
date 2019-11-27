@@ -5,12 +5,26 @@ const router = new Router();
 const User = require('./../models/user');
 const bcrypt = require("bcrypt");
 
-router.get('/:id', (req, res, next) => {
+
+const routeGuard = require('./../middleware/route-guard');
+
+// router.get('/profile/:id', routeGuard, (req, res, next) => {
+//   console.log(req.params.id);
+//   res.render('user');
+//   //used to be private instead of user
+// });
+
+
+router.get('/:id', routeGuard, (req, res, next) => {
     const id = req.params.id;
+    const loggedUser = req.user;
+    console.log("dentro do get:id", req.params.id);
     User.findById(id)
         .then(user => {
+            console.log("check if its the params user -> ", user);
             res.render('user', {
-                user
+                user,
+                loggedUser
             });
         })
         .catch(error => {
