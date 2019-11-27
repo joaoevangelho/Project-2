@@ -16,97 +16,130 @@
 <body>
   <nav>
 
-    <a class="navbar-brand" href="/">Home Page</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/">Home Page</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
 
-    {{#if user}}
+            {{#if user}}
+          <li class="nav-item active">
+            <form action="/authentication/sign-out" method="POST">
+              <a class="nav-link" href="/authentication/sign-out">Sign Out</a>
+            </form>
+            <a href="/profile/{{user._id}}">{{user.name}}'s Profile</a>
 
-    <form action="/authentication/sign-out" method="POST">
-      <a href="/authentication/sign-out">Sign Out</a>
-    </form>
-    <a href="/profile/{{user._id}}">{{user.name}}'s Profile</a>
-
-    {{else}}
-    <a href="/authentication/sign-in">Sign In</a>
-    <a href="/authentication/sign-up">Sign Up</a>
-
-    {{/if}}
-
-
-  </nav>
-  {{{body}}}
-
-  <script src="/scripts/script.js"></script>
-  <script>
+            {{else}}
 
 
-    function initialize() {
-      initMap();
-      initMap2();
-    }
+          <li class="nav-item">
+            <a class="nav-link" href="/authentication/sign-in">Sign In</a>
+          </li>
 
-    function initMap() {
-      console.log('Google library was loaded');
-      const $mapContainer = document.getElementById('map');
+          <li class="nav-item">
+            <a class="nav-link" href="/authentication/sign-up">Sign Up</a>
+            {{/if}}
 
 
-      if ($mapContainer) {
-        const map = new window.google.maps.Map($mapContainer, {
-          center: {
-            lat: 38.7,
-            lng: -9.1
-          },
-          zoom: 12,
-          //disableDefaultUI: true,
-          //mapTypeId: 'satellite',
-          //mapTypeId: 'roadmap', // -> default
-          //mapTypeId: 'terrain',
-          mapTypeId: 'hybrid',
-        });
+          <li class="nav-item">
+            <a class="nav-link" href="#">About us</a>
+          </li>
 
-        const betaICoordinates = {
-          lat: 38.729,
-          lng: -9.144
-        };
+        </ul>
+      </div>
 
-        const marker = new window.google.maps.Marker({
-          position: betaICoordinates,
-          map
-        });
+    </nav>
 
-        map.addListener('click', event => {
-          console.log(event);
-          const position = {
-            lat: event.latLng.lat(),
-            lng: event.latLng.lng()
+
+    <div class="jumbotron">
+      <h1 class="display-4">Surf Mate finder</h1>
+      <p class="lead"> Find your instructor near by and go surf</p>
+      <hr class="my-4">
+      <p>Search by time, location, experience and find like-minded people to share your next surf experience</p>
+      <a class="btn btn-primary btn-lg" href="/authentication/sign-up" role="button">Register today</a>
+    </div>
+
+
+
+
+
+    {{{body}}}
+
+    <script src="/scripts/script.js"></script>
+    <script>
+
+
+
+      //Comentado para nao aparecer na home  MAP
+
+      // function initialize() {
+      // initMap();
+      //    initMap2();
+      //  }
+
+      function initMap() {
+        console.log('Google library was loaded');
+        const $mapContainer = document.getElementById('map');
+
+
+        if ($mapContainer) {
+          const map = new window.google.maps.Map($mapContainer, {
+            center: {
+              lat: 38.7,
+              lng: -9.1
+            },
+            zoom: 12,
+            //disableDefaultUI: true,
+            //mapTypeId: 'satellite',
+            //mapTypeId: 'roadmap', // -> default
+            //mapTypeId: 'terrain',
+            mapTypeId: 'hybrid',
+          });
+
+          const betaICoordinates = {
+            lat: 38.729,
+            lng: -9.144
           };
-          //console.log(position);
-          new window.google.maps.Marker({
-            position,
+
+          const marker = new window.google.maps.Marker({
+            position: betaICoordinates,
             map
           });
 
-        })
-      }
+          map.addListener('click', event => {
+            console.log(event);
+            const position = {
+              lat: event.latLng.lat(),
+              lng: event.latLng.lng()
+            };
+            //console.log(position);
+            new window.google.maps.Marker({
+              position,
+              map
+            });
 
-    };
+          })
+        }
 
-  </script>
-  <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGD7_VrYPlO5F-qYuZSo_KSNAjHWev2Tg&callback=initialize"></script>
+      };
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-    crossorigin="anonymous"></script>
+    </script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGD7_VrYPlO5F-qYuZSo_KSNAjHWev2Tg&callback=initialize"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+      integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+      integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+      crossorigin="anonymous"></script>
 </body>
 
 </html>
