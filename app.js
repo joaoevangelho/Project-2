@@ -15,7 +15,9 @@ const connectMongo = require("connect-mongo");
 const MongoStore = connectMongo(expressSession);
 const mongoose = require("mongoose");
 const User = require("./models/user");
-const hbs = require("hbs")
+const hbs = require("hbs");
+const profileRouter = require("./routes/profile");
+
 //HBS HELPERS
 hbs.registerHelper('ifEquals', function (arg1, arg2, options) {
   return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
@@ -89,6 +91,7 @@ app.use((req, res, next) => {
 
 app.use('/authentication', authenticationRouter);
 app.use("/", indexRouter);
+app.use("/profile", profileRouter);
 // app.use('/user', usersRouter);
 
 
