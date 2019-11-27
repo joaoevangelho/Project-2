@@ -1,9 +1,6 @@
 "use strict";
 
 
-//teste
-//zé simão
-
 const {
   Router
 } = require("express");

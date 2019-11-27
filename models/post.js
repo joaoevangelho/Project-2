@@ -7,12 +7,7 @@ const postSchema = new mongoose.Schema({
     maxlength: 140,
     minlength: 1
   },
-  Teacher: {
-    type: mongoose.Types.ObjectId,
-    required: true,
-    ref: 'User'
-  },
-  Surfer: {
+  author: {
     type: mongoose.Types.ObjectId,
     required: true,
     ref: 'User'
@@ -21,6 +16,9 @@ const postSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     ref: 'Image'
   }]
+  // photo: {
+  //   type: String
+  // }
 }, {
   timestamps: {
     createdAt: 'creationDate',

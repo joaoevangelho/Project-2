@@ -4,19 +4,22 @@ const {
   join
 } = require("path");
 const express = require("express");
+const hbs = require("hbs");
 const createError = require("http-errors");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const sassMiddleware = require("node-sass-middleware");
 const serveFavicon = require("serve-favicon");
-
 const expressSession = require("express-session");
 const connectMongo = require("connect-mongo");
 const MongoStore = connectMongo(expressSession);
 const mongoose = require("mongoose");
+
 const User = require("./models/user");
-const hbs = require("hbs");
 const profileRouter = require("./routes/profile");
+
+const postRouter = require('./routes/post');
+
 
 //HBS HELPERS
 hbs.registerHelper('ifEquals', function (arg1, arg2, options) {
@@ -26,12 +29,16 @@ const indexRouter = require("./routes/index");
 const authenticationRouter = require('./routes/authentication');
 
 
+
 // const usersRouter = require('./routes/user');
 
 const app = express();
 
-app.set("views", join(__dirname, "views"));
+hbs.registerPartials(join(__dirname, 'views/partials'));
+
+
 app.set("view engine", "hbs");
+app.set("views", join(__dirname, "views"));
 
 app.use(logger("dev"));
 app.use(
@@ -39,6 +46,7 @@ app.use(
     extended: true
   })
 );
+app.use(express.static(join(__dirname, 'public')));
 app.use(cookieParser());
 app.use(serveFavicon(join(__dirname, "public/images", "favicon.ico")));
 app.use(
@@ -49,7 +57,6 @@ app.use(
     sourceMap: true
   })
 );
-app.use(express.static(join(__dirname, 'public')));
 
 app.use(
   expressSession({
@@ -93,7 +100,7 @@ app.use('/authentication', authenticationRouter);
 app.use("/", indexRouter);
 app.use("/profile", profileRouter);
 // app.use('/user', usersRouter);
-
+app.use('/post', postRouter);
 
 // Catch missing routes and forward to error handler
 app.use((req, res, next) => {

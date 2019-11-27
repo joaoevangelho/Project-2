@@ -1,7 +1,14 @@
 <h1>User Profile</h1>
 <p>{{user.name}}</p>
-<img src="{{user.photo}}" alt="bla" id="TeacherPhoto">
 
+<a href="/post/create">Create Post</a>
+<a href="/post/list">See all posts</a>
+
+{{#each posts}}
+<a href="/post/{{ this._id }}">
+    {{> singlepost}}
+</a>
+{{/each}}
 
 
 <div class="sec-profile">
@@ -53,14 +60,16 @@
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Name</label>
                                 <div class="col-lg-9">
-                                    <input name="name" class="form-control" type="text" placeholder="{{user.name}}">
+                                    <input name="name" class="form-control" type="text" placeholder="{{user.name}}"
+                                        required>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label disabled">Email </label>
                                 <div class="col-lg-9">
-                                    <input name="email" class="form-control" type="text" placeholder="{{user.email}}">
+                                    <input name="email" class="form-control" type="email" placeholder="{{user.email}}"
+                                        required>
 
                                 </div>
                             </div>
@@ -89,11 +98,13 @@
                 </div>
             </div>
             <div class="col-lg-4 order-lg-1 text-center">
-                <img src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="photo">
-                <h6 class="mt-2">Upload a different photo</h6>
+                <img src="{{user.photo}}" alt="photo" class="mx-auto img-fluid img-circle d-block" id="TeacherPhoto">
+
+                {{!-- <img src="" class="mx-auto img-fluid img-circle d-block" alt="photo"> --}}
+                {{!-- <h6 class="mt-2">Upload a different photo</h6> --}}
                 <label class="custom-file">
                     <input type="file" id="file" class="custom-file-input">
-                    <span class="btn btn-success custom-file-control">Choose file</span>
+                    <span class="btn btn-success custom-file-control">Choose new photo</span>
                 </label>
             </div>
         </div>
