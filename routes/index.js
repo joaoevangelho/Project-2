@@ -19,7 +19,10 @@ router.get("/", (req, res, next) => {
 
 const routeGuard = require('./../middleware/route-guard');
 
-router.get('/profile', routeGuard, (req, res, next) => {
+router.get('/profile/:id', routeGuard, (req, res, next) => {
+  console.log(req.params.id);
+  
+
   res.render('user');
   //used to be private instead of user
 });

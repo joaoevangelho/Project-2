@@ -8,8 +8,10 @@ cloudinary.config({
 });
 const storage = cloudinaryStorage({
   cloudinary: cloudinary,
-  folder: "the-news", // The name of the folder in cloudinary
+  folder: "Surf-Coach", // The name of the folder in cloudinary
   allowedFormats: ["jpg", "png"]
 });
-const uploadCloud = multer({ storage: storage });
+const uploadCloud = multer({
+  storage: storage
+});
 module.exports = uploadCloud;

@@ -4,14 +4,16 @@
 //teste
 //zé simão
 
-const { Router } = require("express");
+const {
+  Router
+} = require("express");
 const router = new Router();
 
 const User = require("./../models/user");
 const bcrypt = require("bcrypt");
 const uploadCloud = require("../middleware/cloudinary");
 const defaultPhoto =
-  "https://res.cloudinary.com/djjmstl4c/image/upload/v1574346796/174-test/e2r6ucql6nf6r7e0szil.jpg";
+  "https://res.cloudinary.com/djjmstl4c/image/upload/v1574848928/Captura_de_ecra%CC%83_2019-11-27_a%CC%80s_09.59.42_ewge48.png";
 
 router.get("/", (req, res, next) => {
   res.render("index", {
@@ -26,7 +28,12 @@ router.get("/sign-up", (req, res, next) => {
 
 router.post("/sign-up", uploadCloud.single("photo"), (req, res, next) => {
   // console.(req.body);
-  const { name, email, password, role } = req.body;
+  const {
+    name,
+    email,
+    password,
+    role
+  } = req.body;
   bcrypt
     .hash(password, 10)
     .then(hash => {
@@ -55,11 +62,14 @@ router.get("/sign-in", (req, res, next) => {
 
 router.post("/sign-in", (req, res, next) => {
   let userId;
-  const { email, password } = req.body;
+  const {
+    email,
+    password
+  } = req.body;
 
   User.findOne({
-    email
-  })
+      email
+    })
     .then(user => {
       if (!user) {
         return Promise.reject(new Error("There's no user with that email."));
