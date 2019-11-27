@@ -7,20 +7,18 @@ const postSchema = new mongoose.Schema({
     maxlength: 140,
     minlength: 1
   },
-  Teacher: {
+  author: {
     type: mongoose.Types.ObjectId,
-    required: true,
-    ref: 'User'
+    ref: 'User',
+    required: true
   },
-  Surfer: {
-    type: mongoose.Types.ObjectId,
-    required: true,
-    ref: 'User'
-  },
-  images: [{
-    type: mongoose.Types.ObjectId,
-    ref: 'Image'
-  }]
+  // images: [{
+  //   type: mongoose.Types.ObjectId,
+  //   ref: 'Image'
+  // }]
+  photo: {
+    type: String
+  }
 }, {
   timestamps: {
     createdAt: 'creationDate',
