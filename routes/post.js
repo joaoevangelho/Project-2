@@ -29,38 +29,33 @@ router.get('/create', (req, res, next) => {
 
 const uploader = require('./../middleware/cloudinary');
 
-router.post(
-  '/create',
+router.post('/create', uploader.array('images', 5), (req, res, next) => {
+  // console.log(req.file);
+  const text = req.body.text;
+  const author = req.session.user;
 
-  uploader.array('images', 5),
-  (req, res, next) => {
-    // console.log(req.file);
-    const text = req.body.text;
-    const author = req.session.user;
+  const imageObjectArray = (req.files || []).map(file => {
+    return {
+      url: file.url
+    };
+  });
 
-    const imageObjectArray = (req.files || []).map(file => {
-      return {
-        url: file.url
-      };
-    });
-
-    Image.create(imageObjectArray)
-      .then((images = []) => {
-        const imageIds = images.map(image => image._id);
-        return Post.create({
-          text,
-          author,
-          images: imageIds
-        });
-      })
-      .then(document => {
-        res.redirect(`/post/${document._id}`);
-      })
-      .catch(error => {
-        next(error);
+  Image.create(imageObjectArray)
+    .then((images = []) => {
+      const imageIds = images.map(image => image._id);
+      return Post.create({
+        text,
+        author,
+        images: imageIds
       });
-  }
-);
+    })
+    .then(document => {
+      res.redirect(`/post/list`);
+    })
+    .catch(error => {
+      next(error);
+    });
+});
 
 router.get('/:postId', (req, res, next) => {
   const postId = req.params.postId;
@@ -81,7 +76,8 @@ router.get('/:postId/edit', (req, res, next) => {
   const postId = req.params.postId;
   Post.findById(postId)
     .then(post => {
-      if (post.author === req.session.user) {
+      console.log(post.author._id, req.session.user);
+      if (post.author._id.toString() === req.session.user.toString()) {
         res.render('post/edit', {
           post
         });
@@ -114,7 +110,7 @@ router.post('/:postId/edit', (req, res, next) => {
     });
 });
 
-router.post('/:postId/delete', routeGuard, (req, res, next) => {
+router.post('/:postId/delete', (req, res, next) => {
   const postId = req.params.postId;
   Post.findOneAndDelete({
     _id: postId,

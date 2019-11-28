@@ -1,3 +1,5 @@
+'use strict';
+
 const { Router } = require('express');
 const router = new Router();
 const User = require('./../models/user');
@@ -34,6 +36,7 @@ router.get('/:id', routeGuard, (req, res, next) => {
 router.get('/:id/edit', routeGuard, (req, res, next) => {
   const id = req.params.id;
   const loggedUser = req.user;
+
   User.findById(id)
     .then(user => {
       res.render('user/edit', {
@@ -48,28 +51,31 @@ router.get('/:id/edit', routeGuard, (req, res, next) => {
 //para edit photo
 router.post('/:id/edit', uploadCloud.single('photo'), (req, res, next) => {
   const id = req.params.id;
-  const { name, email, role, latitude, longitude, photo } = req.body;
-  User.findByIdAndUpdate(id, {
-    name,
-    email,
-    //está-me a dar sempre a defaultPhoto quando edito a fotografia
-    photo: req.file ? req.file.secure_url : defaultPhoto,
-    role,
-    ...(longitude &&
-      latitude && {
-        location: {
-          type: 'Point',
-          coordinates: [longitude, latitude]
-        }
-      })
-  })
-    .then(user => {
-      console.log('after updateing user ->', user);
-      res.redirect('/profile/' + user._id);
+  const { name, email, role, latitude, longitude } = req.body;
+
+  User.findById(id).then(user => {
+    User.findByIdAndUpdate(id, {
+      name,
+      email,
+      //está-me a dar sempre a defaultPhoto quando edito a fotografia
+      photo: req.file ? req.file.secure_url : user.photo,
+      role,
+      ...(longitude &&
+        latitude && {
+          location: {
+            type: 'Point',
+            coordinates: [longitude, latitude]
+          }
+        })
     })
-    .catch(error => {
-      next(error);
-    });
+      .then(user => {
+        console.log('after updating user ->', user);
+        res.redirect('/profile/' + user._id);
+      })
+      .catch(error => {
+        next(error);
+      });
+  });
 });
 
 // DELETE PROFILE

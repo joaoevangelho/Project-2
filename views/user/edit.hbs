@@ -21,8 +21,8 @@
 
   <div class="form-group">
     <label class="form-control-label">Location</label>
-    <input name="longitude" class="form-control" type="text" placeholder="Longitude" value={{user.longitude}} readonly />
-    <input name="latitude" class="form-control" type="text" placeholder="Latitude" value={{user.latitude}} readonly />
+    <input name="longitude" class="form-control" type="number" placeholder="Longitude" value={{user.longitude}} required readonly>
+    <input name="latitude" class="form-control" type="number" placeholder="Latitude" value={{user.latitude}} required readonly>
   </div>
 
   <div class="form-group">
@@ -40,6 +40,7 @@
     <label class="form-control-label">Profile Photo</label>
     <input type="file" id="file" name="photo">
   </div>
+
 
   <div class="form-group">
     <input type="reset" class="btn btn-secondary" value="Cancel">
