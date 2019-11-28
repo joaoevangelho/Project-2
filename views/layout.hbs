@@ -31,9 +31,10 @@
             <form action="/authentication/sign-out" method="POST">
               <a class="nav-link" href="/authentication/sign-out">Sign Out</a>
             </form>
+          <li class="nav-item">
             <a href="/profile/{{user._id}}">{{user.name}}'s Profile</a>
-
-            {{else}}
+          </li>
+          {{else}}
 
 
           <li class="nav-item">
@@ -41,13 +42,15 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="/authentication/sign-up">Sign Up</a>
+            {{!-- <a class="nav-link" href="/authentication/sign-up">Sign Up</a> --}}
+            <a class="btn btn-primary btn-lg" href="/authentication/sign-up" role="button">Register today</a>
+
             {{/if}}
 
-
+            {{!-- 
           <li class="nav-item">
-            <a class="nav-link" href="#">About us</a>
-          </li>
+            <a class="nav-link" href="/about-us/">About us</a>
+          </li> --}}
 
         </ul>
       </div>
@@ -60,7 +63,6 @@
       <p class="lead"> Find your instructor near by and go surf</p>
       <hr class="my-4">
       <p>Search by time, location, experience and find like-minded people to share your next surf experience</p>
-      <a class="btn btn-primary btn-lg" href="/authentication/sign-up" role="button">Register today</a>
     </div>
 
 

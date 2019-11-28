@@ -20,6 +20,11 @@ router.get("/", (req, res, next) => {
 const routeGuard = require('./../middleware/route-guard');
 
 
+//Sign-Up
+router.get("/about-us", (req, res, next) => {
+  res.render("/about-us");
+});
+
 
 
 

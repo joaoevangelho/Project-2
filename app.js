@@ -29,7 +29,6 @@ const indexRouter = require("./routes/index");
 const authenticationRouter = require('./routes/authentication');
 
 
-
 // const usersRouter = require('./routes/user');
 
 const app = express();
