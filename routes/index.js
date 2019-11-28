@@ -1,32 +1,24 @@
-"use strict";
+'use strict';
 
-const {
-  Router
-} = require("express");
+const { Router } = require('express');
 const router = new Router();
 
-const User = require("./../models/user");
-const bcrypt = require("bcrypt");
+const User = require('./../models/user');
 
-router.get("/", (req, res, next) => {
-  res.render("index", {
-    title: "Hello Surfer!"
+router.get('/', (req, res, next) => {
+  User.find({
+    role: 'Teacher'
+  }).then(allTeachers => {
+    if (!allTeachers) {
+      return Promise.reject(new Error("There's no teachers."));
+    } else {
+      res.render('index', { allTeachers });
+    }
   });
+
+  // res.render('index', {
+  //   title: 'Hello Surfer!'
+  // });
 });
-
-
-
-
-const routeGuard = require('./../middleware/route-guard');
-
-
-//Sign-Up
-router.get("/about-us", (req, res, next) => {
-  res.render("/about-us");
-});
-
-
-
-
 
 module.exports = router;

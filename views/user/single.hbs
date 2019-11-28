@@ -1,0 +1,65 @@
+<h1>{{user.name}} Profile</h1>
+
+<a href="/post/create">Create Post</a>
+<a href="/post/list">See all posts</a>
+
+{{#each posts}}
+  <a href="/post/{{ this._id }}">
+    {{> singlepost}}
+  </a>
+{{/each}}
+
+{{!-- Função para editar o próprio perfil --}}
+
+<p>
+  <strong>Name: </strong> {{user.name}}
+  <br>
+  <strong>Email: </strong> {{user.email}}
+  <br>
+  <strong>Role: </strong> {{user.role}}
+  <strong>Longitude: </strong> {{user.longitude}}
+  <strong>Latitude: </strong> {{user.latitude}}
+  <img src="{{user.photo}}" alt="photo" id="TeacherPhoto">
+</p>
+
+{{#ifEquals loggedUser.id user.id}}
+  <a href="/profile/{{user.id}}/edit">Edit</a>
+{{/ifEquals}}
+
+{{!-- Mapa no perfil do professor!!!!!!!!!! --}}
+
+{{#ifEquals user.role "Teacher"}}
+<a href="mailto:{{user.email}}">Send Email and Book Your Lesson</a>
+{{/ifEquals}}
+
+{{#ifEquals user.role "Teacher"}}
+
+<div id="map2"></div>
+
+<script>
+  let map2;
+  let marker;
+
+  function initMap() {
+    const center = {
+      lat: 38.397,
+      lng: -9.644
+    };
+    map2 = new window.google.maps.Map(document.getElementById('map2'), {
+      zoom: 8,
+      center
+    });
+    {{#if user.latitude}}
+      let position = {
+        lat: {{user.latitude}},
+        lng: {{user.longitude}}
+      };
+      marker = new google.maps.Marker({
+        map: map2,
+        position
+      });
+    {{/if}}
+  }
+</script>
+
+{{/ifEquals}}

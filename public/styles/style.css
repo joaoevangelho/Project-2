@@ -9,29 +9,19 @@ body {
 a {
   color: #00b7ff; }
 
+form {
+  display: flex;
+  flex-direction: column; }
+
 #map {
   width: 80%;
   height: 45em; }
 
 #map2 {
-  width: 80%;
-  height: 45em;
-  border: 1px solid black; }
+  width: 50%;
+  height: 25em; }
 
 #TeacherPhoto {
   width: 220px; }
-
-#floating-panel {
-  position: absolute;
-  top: 10px;
-  left: 25%;
-  z-index: 5;
-  background-color: #fff;
-  padding: 5px;
-  border: 1px solid #999;
-  text-align: center;
-  font-family: "Roboto", "sans-serif";
-  line-height: 30px;
-  padding-left: 10px; }
 
 /*# sourceMappingURL=style.css.map */

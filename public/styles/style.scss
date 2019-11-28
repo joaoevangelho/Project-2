@@ -1,18 +1,22 @@
-$font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $link-color: #00b7ff;
 
 body {
   margin: 0;
   padding: 50px;
   font-family: $font-sans;
-   background-image: url("../images/birdview.jpg");
-   background-repeat: no-repeat;
-    background-size: cover;  
-  
+  background-image: url('../images/birdview.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 a {
   color: $link-color;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
 }
 
 #map {
@@ -21,25 +25,24 @@ a {
 }
 
 #map2 {
-  width: 80%;
-  height: 45em;
-  border: 1px solid black;
+  width: 50%;
+  height: 25em;
 }
 
 #TeacherPhoto {
   width: 220px;
 }
 
-#floating-panel {
-  position: absolute;
-  top: 10px;
-  left: 25%;
-  z-index: 5;
-  background-color: #fff;
-  padding: 5px;
-  border: 1px solid #999;
-  text-align: center;
-  font-family: "Roboto", "sans-serif";
-  line-height: 30px;
-  padding-left: 10px;
-}
+// #floating-panel {
+//   // position: absolute;
+//   top: 10px;
+//   left: 25%;
+//   z-index: 5;
+//   background-color: #fff;
+//   padding: 5px;
+//   border: 1px solid #999;
+//   text-align: center;
+//   font-family: "Roboto", "sans-serif";
+//   line-height: 30px;
+//   padding-left: 10px;
+// }

@@ -1,36 +1,27 @@
-"use strict";
+'use strict';
 
-
-const {
-  Router
-} = require("express");
+const { Router } = require('express');
 const router = new Router();
 
-const User = require("./../models/user");
-const bcrypt = require("bcrypt");
-const uploadCloud = require("../middleware/cloudinary");
+const User = require('./../models/user');
+const bcrypt = require('bcrypt');
+const uploadCloud = require('../middleware/cloudinary');
 const defaultPhoto =
-  "https://res.cloudinary.com/djjmstl4c/image/upload/v1574848928/Captura_de_ecra%CC%83_2019-11-27_a%CC%80s_09.59.42_ewge48.png";
+  'https://res.cloudinary.com/djjmstl4c/image/upload/v1574848928/Captura_de_ecra%CC%83_2019-11-27_a%CC%80s_09.59.42_ewge48.png';
 
-router.get("/", (req, res, next) => {
-  res.render("index", {
-    title: "Hello Surfer!"
+router.get('/', (req, res, next) => {
+  res.render('index', {
+    title: 'Hello Surfer!'
   });
 });
 
 //Sign-Up
-router.get("/sign-up", (req, res, next) => {
-  res.render("authentication/sign-up");
+router.get('/sign-up', (req, res, next) => {
+  res.render('authentication/sign-up');
 });
 
-router.post("/sign-up", uploadCloud.single("photo"), (req, res, next) => {
-  // console.(req.body);
-  const {
-    name,
-    email,
-    password,
-    role
-  } = req.body;
+router.post('/sign-up', uploadCloud.single('photo'), (req, res, next) => {
+  const { name, email, password, role } = req.body;
   bcrypt
     .hash(password, 10)
     .then(hash => {
@@ -43,9 +34,9 @@ router.post("/sign-up", uploadCloud.single("photo"), (req, res, next) => {
       });
     })
     .then(user => {
-      // console.log("Created user", user);
+      console.log('Created user', user);
       req.session.user = user._id;
-      res.redirect("/");
+      res.redirect('/');
     })
     .catch(error => {
       next(error);
@@ -53,20 +44,17 @@ router.post("/sign-up", uploadCloud.single("photo"), (req, res, next) => {
 });
 
 // Sign-in
-router.get("/sign-in", (req, res, next) => {
-  res.render("authentication/sign-in");
+router.get('/sign-in', (req, res, next) => {
+  res.render('authentication/sign-in');
 });
 
-router.post("/sign-in", (req, res, next) => {
+router.post('/sign-in', (req, res, next) => {
   let userId;
-  const {
-    email,
-    password
-  } = req.body;
+  const { email, password } = req.body;
 
   User.findOne({
-      email
-    })
+    email
+  })
     .then(user => {
       if (!user) {
         return Promise.reject(new Error("There's no user with that email."));
@@ -80,7 +68,7 @@ router.post("/sign-in", (req, res, next) => {
         req.session.user = userId;
         res.redirect('/profile/' + userId);
       } else {
-        return Promise.reject(new Error("Wrong password."));
+        return Promise.reject(new Error('Wrong password.'));
       }
     })
     .catch(error => {
@@ -89,11 +77,9 @@ router.post("/sign-in", (req, res, next) => {
 });
 
 // Sign Out
-router.get("/sign-out", (req, res, next) => {
+router.get('/sign-out', (req, res, next) => {
   req.session.destroy();
-  res.redirect("/");
+  res.redirect('/');
 });
 
 module.exports = router;
-
-//nao percebo anda disto

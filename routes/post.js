@@ -23,7 +23,7 @@ router.get('/list', (req, res, next) => {
     });
 });
 
-router.get('/create', routeGuard, (req, res, next) => {
+router.get('/create', (req, res, next) => {
   res.render('post/create');
 });
 
@@ -31,7 +31,7 @@ const uploader = require('./../middleware/cloudinary');
 
 router.post(
   '/create',
-  routeGuard,
+
   uploader.array('images', 5),
   (req, res, next) => {
     // console.log(req.file);
@@ -77,7 +77,7 @@ router.get('/:postId', (req, res, next) => {
     });
 });
 
-router.get('/:postId/edit', routeGuard, (req, res, next) => {
+router.get('/:postId/edit', (req, res, next) => {
   const postId = req.params.postId;
   Post.findById(postId)
     .then(post => {
@@ -94,15 +94,18 @@ router.get('/:postId/edit', routeGuard, (req, res, next) => {
     });
 });
 
-router.post('/:postId/edit', routeGuard, (req, res, next) => {
+router.post('/:postId/edit', (req, res, next) => {
   const postId = req.params.postId;
 
-  Post.findOneAndUpdate({
+  Post.findOneAndUpdate(
+    {
       _id: postId,
       author: req.session.user
-    }, {
+    },
+    {
       text: req.body.text
-    })
+    }
+  )
     .then(data => {
       res.redirect(`/post/${postId}`);
     })
@@ -114,9 +117,9 @@ router.post('/:postId/edit', routeGuard, (req, res, next) => {
 router.post('/:postId/delete', routeGuard, (req, res, next) => {
   const postId = req.params.postId;
   Post.findOneAndDelete({
-      _id: postId,
-      author: req.session.user
-    })
+    _id: postId,
+    author: req.session.user
+  })
     .then(data => {
       res.redirect(`/post/list`);
     })
