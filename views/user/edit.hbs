@@ -1,6 +1,6 @@
 <h1>{{user.name}} Profile</h1>
 
-<form role="form" action="/profile/{{user.id}}/edit" method="POST">
+<form role="form" action="/profile/{{user.id}}/edit" method="POST"  enctype="multipart/form-data">
   <div class="form-group">
     <label class="form-control-label">Name</label>
     <input name="name" class="form-control" type="text" value="{{user.name}}" placeholder="Name" required>
