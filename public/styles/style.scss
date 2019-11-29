@@ -2,12 +2,17 @@ $font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $link-color: #00b7ff;
 
 body {
-  margin: 0;
-  padding: 50px;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 50px 200px 50px 200px;
   font-family: $font-sans;
   background-image: url('../images/birdview.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+#mainContainer {
+  background-color: #ffffff91;
 }
 
 a {
@@ -26,29 +31,31 @@ form {
 
 #map2 {
   width: 50%;
-  height: 25em;
+  height: 35em;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
 }
 
 #TeacherPhoto {
-  width: 220px;
+  object-fit: cover;
+  width: 200px;
+  height: 200px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
-// #floating-panel {
-//   // position: absolute;
-//   top: 10px;
-//   left: 25%;
-//   z-index: 5;
-//   background-color: #fff;
-//   padding: 5px;
-//   border: 1px solid #999;
-//   text-align: center;
-//   font-family: "Roboto", "sans-serif";
-//   line-height: 30px;
-//   padding-left: 10px;
-// }
 
 .teacher-info {
   img {
-    width: 4em;
+    width: 8em;
   }
+}
+
+.profile-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+button a:hover {
+  text-decoration: none;
 }

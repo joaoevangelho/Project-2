@@ -1,9 +1,16 @@
 {{!-- <h1>{{title}}</h1> --}}
 {{!-- <p>Welcome {{user.name}}</p> --}}
 
+  <div class="jumbotron">
+        <h1 class="display-4">Surf Mate finder</h1>
+        <p class="lead"> Find your instructor near by and go surf</p>
+        <hr class="my-4">
+        <p>Search by time, location, experience and find like-minded people to share your next surf experience</p>
+      </div>
+
 <div class="div-map map-welcome-page" id="map"></div>
 
-<ul>
+{{!-- <ul>
   {{#each allTeachers}}
   <li>
   <a href="/allTeachers/{{this._id}}">{{this.name}}</a>
@@ -13,7 +20,7 @@
     {{location.coordinates.[1]}}
   </li>
   {{/each}}
-</ul>
+</ul> --}}
 
 <script>
   const teachers = [

@@ -1,7 +1,5 @@
-<h1>{{user.name}} Profile</h1>
 
-<a href="/post/create">Create Post</a>
-<a href="/post/list">See all posts</a>
+
 
 {{#each posts}}
   <a href="/post/{{ this._id }}">
@@ -10,32 +8,42 @@
 {{/each}}
 
 {{!-- Função para editar o próprio perfil --}}
-
+<div class="row">
+  <div class="col-sm-6 text-center profile-image">
 <p>
-  <strong>Name: </strong> {{user.name}}
   <br>
-  <strong>Email: </strong> {{user.email}}
-  <br>
-  <strong>Role: </strong> {{user.role}}
-  <strong>Longitude: </strong> {{user.longitude}}
-  <strong>Latitude: </strong> {{user.latitude}}
-  <img src="{{user.photo}}" alt="photo" id="TeacherPhoto">
-</p>
+    <img class="rounded-circle" src="{{user.photo}}" alt="photo" id="TeacherPhoto">
+    <h1>{{user.name}}</h1>
 
-{{#ifEquals loggedUser.id user.id}}
-  <a href="/profile/{{user.id}}/edit">Edit</a>
-{{/ifEquals}}
+
+  <h3>{{user.role}}</h3> 
+   {{#ifEquals user.role "Teacher"}}
+
+   <button type="button" class="btn btn-warning">
+  <a href="mailto:{{user.email}}">Book Classes</a>
+  </button>
+
+  {{/ifEquals}}
+  <br>
+  {{!-- <strong>Name: </strong> {{user.name}} --}}
+  {{!-- <br> --}}
+  {{!-- <strong>Email: </strong> {{user.email}}
+  <br> --}}
+ 
+  {{!-- <strong>Longitude: </strong> {{user.longitude}}
+  <strong>Latitude: </strong> {{user.latitude}} --}}
+</p>
+</div>
+
+
+
+
 
 {{!-- Mapa no perfil do professor!!!!!!!!!! --}}
 
 {{#ifEquals user.role "Teacher"}}
-<a href="mailto:{{user.email}}">Send Email and Book Your Lesson</a>
-{{/ifEquals}}
-
-{{#ifEquals user.role "Teacher"}}
-
 <div id="map2"></div>
-
+<div class="col-sm-6">
 <script>
   let map2;
   let marker;
@@ -61,5 +69,16 @@
     {{/if}}
   }
 </script>
-
 {{/ifEquals}}
+</div>
+
+
+<br>
+<a href="/post/create">Create Post</a>
+<a href="/post/list">See all posts</a>
+<br>
+
+{{#ifEquals loggedUser.id user.id}}
+  <a href="/profile/{{user.id}}/edit">Edit</a>
+{{/ifEquals}}
+</div>
