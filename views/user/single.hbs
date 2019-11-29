@@ -33,6 +33,18 @@
   {{!-- <strong>Longitude: </strong> {{user.longitude}}
   <strong>Latitude: </strong> {{user.latitude}} --}}
 </p>
+
+<br>
+<a class="btn btn-primary" href="/post/create">Create Post</a>
+<br>
+{{!-- <a class="btn btn-primary" href="/post/list">See all posts</a> --}}
+{{!-- <br> --}}
+
+{{#ifEquals loggedUser.id user.id}}
+  <a class="btn btn-primary" href="/profile/{{user.id}}/edit">Edit Profile</a>
+{{/ifEquals}}
+
+
 </div>
 
 
@@ -73,12 +85,7 @@
 </div>
 
 
-<br>
-<a href="/post/create">Create Post</a>
-<a href="/post/list">See all posts</a>
-<br>
 
-{{#ifEquals loggedUser.id user.id}}
-  <a href="/profile/{{user.id}}/edit">Edit</a>
-{{/ifEquals}}
+
+
 </div>

@@ -27,6 +27,8 @@ form {
 #map {
   width: 80%;
   height: 45em;
+  text-align: center;
+  margin: auto;
 }
 
 #map2 {
@@ -58,4 +60,9 @@ form {
 
 button a:hover {
   text-decoration: none;
+}
+
+.single-post p {
+  text-decoration: none;
+  color: black;
 }
